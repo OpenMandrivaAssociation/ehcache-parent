@@ -1,42 +1,62 @@
+%{?_javapackages_macros:%_javapackages_macros}
+Name:          ehcache-parent
+Version:       2.3
+Release:       5.1%{?dist}
+Summary:       Ehcache Parent
 
-%undefine _compress
-%undefine _extension
-%global _duplicate_files_terminate_build 0
-%global _files_listed_twice_terminate_build 0
-%global _unpackaged_files_terminate_build 0
-%global _nonzero_exit_pkgcheck_terminate_build 0
-%global _use_internal_dependency_generator 0
-%global __find_requires /bin/sed -e 's/.*//'
-%global __find_provides /bin/sed -e 's/.*//'
+License:       ASL 2.0
+URL:           http://www.terracotta.org/
+# svn export http://svn.terracotta.org/svn/ehcache/tags/ehcache-parent-2.3
+# tar czf ehcache-parent-2.3-src-svn.tar.gz ehcache-parent-2.3
+Source0:       ehcache-parent-2.3-src-svn.tar.gz
+BuildRequires: java-devel
+BuildRequires: jpackage-utils
+BuildRequires: maven-compiler-plugin
+BuildRequires: maven-gpg-plugin
+BuildRequires: maven-idea-plugin
+BuildRequires: maven-javadoc-plugin
+BuildRequires: maven-plugin-cobertura
+BuildRequires: maven-pmd-plugin
+BuildRequires: maven-source-plugin
+BuildRequires: maven-release-plugin
+BuildRequires: maven-surefire-plugin
+Requires: jpackage-utils
+Requires: java
+BuildArch: noarch
 
-Name:		ehcache-parent
-Version:	2.3
-Release:	5.0
-License:	GPLv3+
-Source0:	ehcache-parent-2.3-5.0-omv2014.0.noarch.rpm
-
-URL:		https://abf.rosalinux.ru/openmandriva/ehcache-parent
-BuildArch:	noarch
-Summary:	ehcache-parent bootstrap version
-Requires:	javapackages-bootstrap
-Requires:	java
-Requires:	jpackage-utils
-Provides:	ehcache-parent = 2.3-5.0:2014.0
-Provides:	mvn(net.sf.ehcache:ehcache-parent) = 2.3
-Provides:	mvn(net.sf.ehcache:ehcache-parent:pom:) = 2.3
 
 %description
-ehcache-parent bootstrap version.
+Ehcache is a widely used, pure Java, in-process, distributed cache.
 
-%files
-/usr/share/maven-fragments/ehcache-parent
-/usr/share/maven-poms/JPP-ehcache-parent.pom
-
-#------------------------------------------------------------------------
 %prep
+
+%setup -q -n ehcache-parent-%{version}
 
 %build
 
 %install
-cd %{buildroot}
-rpm2cpio %{SOURCE0} | cpio -id
+install -d -m 755 $RPM_BUILD_ROOT%{_mavenpomdir}
+install -pm 644 pom.xml $RPM_BUILD_ROOT%{_mavenpomdir}/JPP-%{name}.pom
+%add_maven_depmap JPP-%{name}.pom
+
+
+%files
+%{_mavenpomdir}/*
+%{_mavendepmapfragdir}/*
+
+%changelog
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.3-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
+* Wed Feb 13 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.3-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+
+* Wed Jul 18 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.3-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
+* Wed Jan 18 2012 David Nalley <david@gnsa.us> - 2.3-2
+- removing antiquated maven2 stylings
+- fixing BR so this actually builds. 
+
+* Mon Jan 16 2012 David Nalley <david@gnsa.us> - 2.3-1 
+- Initial rpm build - spec modified from mageia's version of same
