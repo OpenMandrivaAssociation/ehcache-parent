@@ -1,4 +1,4 @@
-%_javapackages_macros
+%{?_javapackages_macros:%_javapackages_macros}
 Name:          ehcache-parent
 Version:       2.3
 Release:       5.0%{?dist}
@@ -43,3 +43,20 @@ install -pm 644 pom.xml $RPM_BUILD_ROOT%{_mavenpomdir}/JPP-%{name}.pom
 %files
 %{_mavenpomdir}/*
 %{_mavendepmapfragdir}/*
+
+%changelog
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.3-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
+* Wed Feb 13 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.3-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+
+* Wed Jul 18 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.3-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
+* Wed Jan 18 2012 David Nalley <david@gnsa.us> - 2.3-2
+- removing antiquated maven2 stylings
+- fixing BR so this actually builds. 
+
+* Mon Jan 16 2012 David Nalley <david@gnsa.us> - 2.3-1 
+- Initial rpm build - spec modified from mageia's version of same
