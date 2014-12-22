@@ -1,9 +1,9 @@
 %{?_javapackages_macros:%_javapackages_macros}
 Name:          ehcache-parent
 Version:       2.3
-Release:       5.1%{?dist}
+Release:       8.1
 Summary:       Ehcache Parent
-
+Group:         Development/Java
 License:       ASL 2.0
 URL:           http://www.terracotta.org/
 # svn export http://svn.terracotta.org/svn/ehcache/tags/ehcache-parent-2.3
@@ -40,9 +40,7 @@ install -pm 644 pom.xml $RPM_BUILD_ROOT%{_mavenpomdir}/JPP-%{name}.pom
 %add_maven_depmap JPP-%{name}.pom
 
 
-%files
-%{_mavenpomdir}/*
-%{_mavendepmapfragdir}/*
+%files -f .mfiles
 
 %changelog
 * Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.3-5
