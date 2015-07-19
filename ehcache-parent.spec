@@ -1,7 +1,7 @@
 %{?_javapackages_macros:%_javapackages_macros}
 Name:          ehcache-parent
 Version:       2.3
-Release:       8.1
+Release:       8.2
 Summary:       Ehcache Parent
 Group:         Development/Java
 License:       ASL 2.0
