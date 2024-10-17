@@ -5,7 +5,7 @@ Release:       8.3
 Summary:       Ehcache Parent
 Group:         Development/Java
 License:       ASL 2.0
-URL:           http://www.terracotta.org/
+URL:           https://www.terracotta.org/
 # svn export http://svn.terracotta.org/svn/ehcache/tags/ehcache-parent-2.3
 # tar czf ehcache-parent-2.3-src-svn.tar.gz ehcache-parent-2.3
 Source0:       ehcache-parent-2.3-src-svn.tar.gz
